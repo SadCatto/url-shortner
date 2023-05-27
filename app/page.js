@@ -1,17 +1,46 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
+import { useState } from "react";
+
 export default function Home() {
+  const [link, setLink] = useState(null)
+  const [linkNotFound, setLinkNotFound] = useState(false)
+  const [prevlink, setprevtLink] = useState(null)
+  const [shortLink, setShortLink] = useState(null)
+  const [copied, setCopied] = useState(false)
   const handleClickScroll = () => {
     const element = document.getElementById('middle');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+  const shorten = async () => {
+    try {
+      if (link == '' || !link) {
+        setLinkNotFound(true)
+      } else {
+        const res = await fetch(`https://api.shrtco.de/v2/shorten?url=${link}`);
+        const data = await res.json();
+        setShortLink(data.result['full_short_link'])
+        setCopied(false)
+        setprevtLink(link)
+        setLink('')
+        setLinkNotFound(false)
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const copyButton = () => {
+    navigator.clipboard.writeText(shortLink)
+    setCopied(true)
+  }
   return (
     <main>
       <div className="flex flex-col lg:gap-16 overflow-x-hidden">
-        <div className="flex font-bold text-[32px] py-6 px-2">
+        <div className="flex font-bold text-[32px] py-6 px-2 lg:px-24">
           {/* <h1>Shortly</h1> */}
           <img src="/images/logo.svg" className="pb-4" alt="logo"></img>
         </div>
@@ -20,7 +49,7 @@ export default function Home() {
           {/* Div for top section */}
           <div className="flex flex-col gap-80">
             {/* Basically page 1 */}
-            <div className="flex flex-col p-2 h-min items-center gap-2 bg-white lg:flex-row lg:flex-row-reverse lg:items-center lg:place-content-around lg:w-full">
+            <div className="flex flex-col p-2 h-min items-center gap-2 bg-white lg:flex-row lg:flex-row-reverse lg:items-center lg:place-content-around lg:w-full lg:px-32 lg:py-8">
               {/* Div for homepage image */}
               <div className="p-2 lg:w-full lg:max-w-[40%]">
                 <img src="/images/illustration-working.svg" alt="Working svg"></img>
@@ -36,11 +65,28 @@ export default function Home() {
               </div>
             </div>
             {/* Div for Enter URL section  */}
-            <div className="bg-n-gray-violet">
+            <div className="bg-n-gray-violet p-2 lg:px-20">
               <div className="p-2 relative -top-16" id="middle">
-                <div className="bg-pr-violet p-2 lg:p-12 bg-[url('/images/bg-shorten-mobile.svg')] lg:bg-[url('/images/bg-shorten-desktop.svg')] bg-cover bg-no-repeat w-full rounded-lg flex flex-col lg:flex-row lg:place-content-between gap-4 bg-right">
-                  <input className="p-2 lg:p-4 rounded-lg w-full max-w-[100%] lg:w-[80%]" placeholder="Shorten a link here..." />
-                  <button className="bg-pr-cyan rounded-lg p-2 lg:p-4 text-center w-full lg:max-w-[15%]">Shorten</button>
+                <div className="bg-pr-violet p-2 lg:p-12 bg-[url('/images/bg-shorten-mobile.svg')] lg:bg-[url('/images/bg-shorten-desktop.svg')] bg-cover bg-no-repeat w-full rounded-lg flex flex-col justify-center lg:flex-row lg:place-content-between gap-4 bg-right">
+                  <div className="flex flex-col w-full max-w-[100%] lg:w-[80%]">
+                    <input className={linkNotFound ? "p-2 lg:p-4 rounded-lg border-rose-500 border-4 w-full max-w-[100%]" : "p-2 lg:p-4 rounded-lg w-full max-w-[100%]"} placeholder="Shorten a link here..." value={link} onChange={event => setLink(event.target.value)} />
+                    <div className={linkNotFound ? "text-rose-500 mt-1" : "hidden"}>Please add a link</div>
+                  </div>
+                  <button className="bg-pr-cyan rounded-lg p-2 h-min lg:p-4 text-center w-full lg:max-w-[15%]" onClick={shorten}>Shorten</button>
+                </div>
+              </div>
+              <div className={prevlink ? "flex flex-col gap-2 p-4 lg:flex-row  place-content-around py-2 mb-8 bg-white rounded-md flex w-full font-bold" : "hidden"}>
+                <div className="p-2 truncate">
+                  {prevlink}
+                </div>
+                <div className="p-2 text-pr-cyan">
+                  {shortLink}
+                </div>
+                <div className={copied ? "hidden" : ""}>
+                  <button className="bg-pr-cyan w-full py-2 px-8 text-white font-bold rounded-lg" onClick={copyButton}>Copy</button>
+                </div>
+                <div className={copied ? "" : "hidden"}>
+                  <button className="bg-pr-violet w-full py-2 px-6 text-white font-bold rounded-lg" onClick={copyButton}>Copied!</button>
                 </div>
               </div>
               <div className="flex flex-col items-center gap-4 text-center leading-10 bg-n-gray-violet">
