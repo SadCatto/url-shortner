@@ -1,113 +1,123 @@
-import Image from 'next/image'
+/* eslint-disable @next/next/no-img-element */
+'use client';
 
 export default function Home() {
+  const handleClickScroll = () => {
+    const element = document.getElementById('middle');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main>
+      <div className="flex flex-col lg:gap-16 overflow-x-hidden">
+        <div className="flex font-bold text-[32px] py-6 px-2">
+          {/* <h1>Shortly</h1> */}
+          <img src="/images/logo.svg" className="pb-4" alt="logo"></img>
+        </div>
+        <div>
+          {/* Div for Navbar */}
+          {/* Div for top section */}
+          <div className="flex flex-col gap-80">
+            {/* Basically page 1 */}
+            <div className="flex flex-col p-2 h-min items-center gap-2 bg-white lg:flex-row lg:flex-row-reverse lg:items-center lg:place-content-around lg:w-full">
+              {/* Div for homepage image */}
+              <div className="p-2 lg:w-full lg:max-w-[40%]">
+                <img src="/images/illustration-working.svg" alt="Working svg"></img>
+              </div>
+              {/* Div for main text  */}
+              <div className="flex flex-col gap-4 items-center p-2 leading-10 lg:w-full">
+                <h1 className="font-bold text-[40px] lg:text-[52px] text-center lg:text-left leading-none p-1">More than just shorter links</h1>
+                <h2 className="leading-8 text-center p-1 text-[18px] text-n-gray">Build your brands recognition and get detailed insights on how your links are performing</h2>
+                {/* Div for get started button */}
+                <div className="flex justify-center text-[18px]">
+                  <button className="rounded-[40px] bg-pr-cyan px-8 py-3 text-white font-[500]" onClick={handleClickScroll}>Get Started</button>
+                </div>
+              </div>
+            </div>
+            {/* Div for Enter URL section  */}
+            <div className="bg-n-gray-violet">
+              <div className="p-2 relative -top-16" id="middle">
+                <div className="bg-pr-violet p-2 lg:p-12 bg-[url('/images/bg-shorten-mobile.svg')] lg:bg-[url('/images/bg-shorten-desktop.svg')] bg-cover bg-no-repeat w-full rounded-lg flex flex-col lg:flex-row lg:place-content-between gap-4 bg-right">
+                  <input className="p-2 lg:p-4 rounded-lg w-full max-w-[100%] lg:w-[80%]" placeholder="Shorten a link here..." />
+                  <button className="bg-pr-cyan rounded-lg p-2 lg:p-4 text-center w-full lg:max-w-[15%]">Shorten</button>
+                </div>
+              </div>
+              <div className="flex flex-col items-center gap-4 text-center leading-10 bg-n-gray-violet">
+                <div className="flex flex-col gap-4 p-2">
+                  <h1 className="font-bold text-[32px]">Advance Statistics</h1>
+                  <h2 className="leading-8 text-center p-1 text-[18px] text-n-very-blue">Track how your links are performing across the web with our advanced statistics dashboard.</h2>
+                </div>
+                <div className="flex flex-col items-center justify-center p-4 lg:flex-row">
+                  <div className="bg-white flex flex-col items-center p-2 rounded-lg lg:items-start lg:max-w-[30%]">
+                    <div className="rounded-full bg-pr-violet h-24 w-24 mx-4 items-center justify-center relative -top-12 flex">
+                      <img src="/images/icon-brand-recognition.svg" alt="brand recoginition"></img>
+                    </div>
+                    <h1 className="font-bold text-[24px] px-4">Brand Recognition</h1>
+                    <h2 className="leading-8 text-center px-4 lg:text-start p-1 text-[16px] text-n-very-blue">Boost your brand recognition with each click. Generic links don&#39;t mean a thing. Branded links help instil confidence in your content</h2>
+                  </div>
+                  <div className="bg-pr-cyan lg:w-8 w-2 h-8 lg:h-2 lg:mt-8"></div>
+                  <div className="bg-white flex flex-col items-center p-2 mt-8 rounded-lg lg:items-start lg:max-w-[30%] lg:mt-16">
+                    <div className="rounded-full bg-pr-violet h-24 w-24 mx-4 items-center justify-center flex relative -top-12">
+                      <img src="/images/icon-detailed-records.svg" alt="brand recoginition"></img>
+                    </div>
+                    <h1 className="font-bold text-[24px] px-4">Detailed Records</h1>
+                    <h2 className="leading-8 text-center px-4 lg:text-start p-1 text-[16px] text-n-very-blue">Gain insights into who is clicking  your links. Knowing when and where people engage with your content helps inform better decisions.</h2>
+                  </div>
+                  <div className="bg-pr-cyan lg:w-8 w-2 h-8 lg:h-2 lg:mt-8"></div>
+                  <div className="bg-white flex flex-col items-center  p-2 mt-8 rounded-lg lg:items-start lg:max-w-[30%] lg:mt-32">
+                    <div className="rounded-full bg-pr-violet h-24 w-24 mx-4 items-center justify-center flex relative -top-12">
+                      <img src="/images/icon-fully-customizable.svg" alt="brand recoginition"></img>
+                    </div>
+                    <h1 className="font-bold text-[24px] px-4">Fully Customizable</h1>
+                    <h2 className="leading-8 text-center px-4 lg:text-start p-1 text-[16px] text-n-very-blue">Improve brand awareness and content discoverability through customizable links, supercharging audience engagement.</h2>
+                  </div>
+                </div>
+                <div>
+                  <div className="bg-[url('/images/bg-boost-mobile.svg')] lg:bg-[url('/images/bg-boost-desktop.svg')] bg-pr-violet bg-cover h-min w-screen bg-no-repeat flex flex-col gap-4 py-24 justify-center items-center text-white">
+                    <h1 className="font-bold text-[32px]">Boost your links today</h1>
+                    <button className="rounded-[40px] bg-pr-cyan px-8 py-3 text-white font-[500]" onClick={handleClickScroll}>Get Started</button>
+                  </div>
+                  <div className="bg-n-very-violet text-white flex flex-col items-center lg:flex-row lg:place-content-around py-8 gap-4">
+                    <h1 className="font-bold text-[32px]">Shortly</h1>
+                    <div className="flex flex-col gap-1">
+                      <h1 className="text-[20px]">Features</h1>
+                      <div className="flex flex-col items-center jusify-center">
+                        <h2 className="text-n-gray">Link Shortning</h2>
+                        <h2 className="text-n-gray">Branded Links</h2>
+                        <h2 className="text-n-gray">Analytics</h2>
+                      </div>
+                    </div>
+                    <div>
+                      <h1 className="text-[20px]">Resources</h1>
+                      <div className="flex flex-col items-center jusify-center">
+                        <h2 className="text-n-gray">Blog</h2>
+                        <h2 className="text-n-gray">Developers</h2>
+                        <h2 className="text-n-gray">Support</h2>
+                      </div>
+                    </div>
+                    <div>
+                      <h1 className="text-[20px]">Company</h1>
+                      <div className="flex flex-col items-center jusify-center">
+                        <h2 className="text-n-gray">About</h2>
+                        <h2 className="text-n-gray">Our Team</h2>
+                        <h2 className="text-n-gray">Careers</h2>
+                        <h2 className="text-n-gray">Contact</h2>
+                      </div>
+                    </div>
+                    <div className="flex gap-4">
+                      <img src="/images/icon-facebook.svg" className="h-min" alt="facebook"></img>
+                      <img src="/images/icon-twitter.svg" className="h-min" alt="twitter"></img>
+                      <img src="/images/icon-pinterest.svg" className="h-min" alt="pinterest"></img>
+                      <img src="/images/icon-instagram.svg" className="h-min" alt="instagram"></img>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </main >
   )
 }
