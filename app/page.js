@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
+import Link from "next/link";
 import { useState } from "react";
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
   const [prevlink, setprevtLink] = useState(null)
   const [shortLink, setShortLink] = useState(null)
   const [copied, setCopied] = useState(false)
+  const [mobileNav, setMobileNav] = useState(false)
   const handleClickScroll = () => {
     const element = document.getElementById('middle');
     if (element) {
@@ -37,12 +39,27 @@ export default function Home() {
     navigator.clipboard.writeText(shortLink)
     setCopied(true)
   }
+
+  const openNav = () => {
+    setMobileNav(!mobileNav)
+  }
   return (
     <main>
       <div className="flex flex-col lg:gap-16 overflow-x-hidden">
-        <div className="flex font-bold text-[32px] py-6 px-2 lg:px-24">
-          {/* <h1>Shortly</h1> */}
-          <img src="/images/logo.svg" className="pb-4" alt="logo"></img>
+        <div className="flex items-center place-content-between h-min font-bold text-[32px] py-6 px-2 lg:px-24">
+          <div className="flex place-content-between w-full lg:w-min">
+            <img src="/images/logo.svg" alt="logo"></img>
+            <button className="lg:hidden" onClick={openNav}><img className="lg:hidden" src="/menu.svg" alt="menu"></img></button>
+            <div className="hidden lg:ml-12 lg:flex lg:gap-8 lg:text-[15px] lg:text-n-gray">
+              <Link className="linkCustom" href="">Features</Link>
+              <Link className="linkCustom" href="">Pricing</Link>
+              <Link className="linkCustom" href="">Resources</Link>
+            </div>
+          </div>
+          <div className="hidden lg:flex lg:gap-8 lg:text-[15px] lg:text-n-gray">
+            <button className="linkCustom">Login</button>
+            <button className="px-4 py-2 bg-pr-cyan text-white rounded-[20px] hover:bg-pr-cyan/[0.50]">Sign Up</button>
+          </div>
         </div>
         <div>
           {/* Div for Navbar */}
@@ -51,8 +68,20 @@ export default function Home() {
             {/* Basically page 1 */}
             <div className="flex flex-col p-2 h-min items-center gap-2 bg-white lg:flex-row lg:flex-row-reverse lg:items-center lg:place-content-around lg:w-full lg:px-32 lg:py-8">
               {/* Div for homepage image */}
-              <div className="p-2 lg:w-full lg:max-w-[40%]">
-                <img src="/images/illustration-working.svg" alt="Working svg"></img>
+              <div className="p-2 w-full p-2 lg:w-full lg:max-w-[40%]">
+                <img className={mobileNav ? "hidden" : ""} src="/images/illustration-working.svg" alt="Working svg"></img>
+                <div className={mobileNav ? "p-8 rounded-lg border-red-800 border-2 bg-pr-violet w-full flex flex-col gap-4" : "hidden"}>
+                  <div className="flex flex-col justify-center items-center gap-4 text-[15px] font-bold text-white">
+                    <Link className="linkCustom" href="">Features</Link>
+                    <Link className="linkCustom" href="">Pricing</Link>
+                    <Link className="linkCustom" href="">Resources</Link>
+                  </div>
+                  <div className="border-b-[0.5px] border-n-gray w-full"></div>
+                  <div className="flex flex-col gap-4 text-[15px] text-white font-bold">
+                    <button className="linkCustom">Login</button>
+                    <button className="px-4 py-2 bg-pr-cyan text-white rounded-[20px] hover:bg-pr-cyan/[0.50]">Sign Up</button>
+                  </div>
+                </div>
               </div>
               {/* Div for main text  */}
               <div className="flex flex-col gap-4 items-center p-2 leading-10 lg:w-full">
@@ -60,7 +89,7 @@ export default function Home() {
                 <h2 className="leading-8 text-center p-1 text-[18px] text-n-gray">Build your brands recognition and get detailed insights on how your links are performing</h2>
                 {/* Div for get started button */}
                 <div className="flex justify-center text-[18px]">
-                  <button className="rounded-[40px] bg-pr-cyan px-8 py-3 text-white font-[500]" onClick={handleClickScroll}>Get Started</button>
+                  <button className="rounded-[40px] bg-pr-cyan px-8 py-3 text-white font-[500] hover:bg-pr-cyan/[0.50]" onClick={handleClickScroll}>Get Started</button>
                 </div>
               </div>
             </div>
@@ -72,7 +101,7 @@ export default function Home() {
                     <input className={linkNotFound ? "p-2 lg:p-4 rounded-lg border-rose-500 border-4 w-full max-w-[100%]" : "p-2 lg:p-4 rounded-lg w-full max-w-[100%]"} placeholder="Shorten a link here..." value={link} onChange={event => setLink(event.target.value)} />
                     <div className={linkNotFound ? "text-rose-500 mt-1" : "hidden"}>Please add a link</div>
                   </div>
-                  <button className="bg-pr-cyan rounded-lg p-2 h-min lg:p-4 text-center w-full lg:max-w-[15%]" onClick={shorten}>Shorten</button>
+                  <button className="bg-pr-cyan rounded-lg p-2 h-min lg:p-4 text-center w-full lg:max-w-[15%]  hover:bg-pr-cyan/[0.50]" onClick={shorten}>Shorten it!</button>
                 </div>
               </div>
               <div className={prevlink ? "flex flex-col gap-2 p-4 lg:flex-row  place-content-around py-2 mb-8 bg-white rounded-md flex w-full font-bold" : "hidden"}>
@@ -83,10 +112,10 @@ export default function Home() {
                   {shortLink}
                 </div>
                 <div className={copied ? "hidden" : ""}>
-                  <button className="bg-pr-cyan w-full py-2 px-8 text-white font-bold rounded-lg" onClick={copyButton}>Copy</button>
+                  <button className="bg-pr-cyan w-full py-2 px-8 text-white font-bold rounded-lg  hover:bg-pr-cyan/[0.50]" onClick={copyButton}>Copy</button>
                 </div>
                 <div className={copied ? "" : "hidden"}>
-                  <button className="bg-pr-violet w-full py-2 px-6 text-white font-bold rounded-lg" onClick={copyButton}>Copied!</button>
+                  <button className="bg-pr-violet w-full py-2 px-6 text-white font-bold rounded-lg  hover:bg-pr-violet/[0.50]" onClick={copyButton}>Copied!</button>
                 </div>
               </div>
               <div className="flex flex-col items-center gap-4 text-center leading-10 bg-n-gray-violet">
@@ -122,33 +151,33 @@ export default function Home() {
                 <div>
                   <div className="bg-[url('/images/bg-boost-mobile.svg')] lg:bg-[url('/images/bg-boost-desktop.svg')] bg-pr-violet bg-cover h-min w-screen bg-no-repeat flex flex-col gap-4 py-24 justify-center items-center text-white">
                     <h1 className="font-bold text-[32px]">Boost your links today</h1>
-                    <button className="rounded-[40px] bg-pr-cyan px-8 py-3 text-white font-[500]" onClick={handleClickScroll}>Get Started</button>
+                    <button className="rounded-[40px] bg-pr-cyan px-8 py-3 text-white font-[500] hover:bg-pr-cyan/[0.50]" onClick={handleClickScroll}>Get Started</button>
                   </div>
                   <div className="bg-n-very-violet text-white flex flex-col items-center lg:flex-row lg:place-content-around py-8 gap-4">
                     <h1 className="font-bold text-[32px]">Shortly</h1>
                     <div className="flex flex-col gap-1">
                       <h1 className="text-[20px]">Features</h1>
                       <div className="flex flex-col items-center jusify-center">
-                        <h2 className="text-n-gray">Link Shortning</h2>
-                        <h2 className="text-n-gray">Branded Links</h2>
-                        <h2 className="text-n-gray">Analytics</h2>
+                        <h2 className="text-n-gray hover:text-pr-cyan hover:cursor-pointer">Link Shortning</h2>
+                        <h2 className="text-n-gray hover:text-pr-cyan hover:cursor-pointer">Branded Links</h2>
+                        <h2 className="text-n-gray hover:text-pr-cyan hover:cursor-pointer">Analytics</h2>
                       </div>
                     </div>
                     <div>
                       <h1 className="text-[20px]">Resources</h1>
                       <div className="flex flex-col items-center jusify-center">
-                        <h2 className="text-n-gray">Blog</h2>
-                        <h2 className="text-n-gray">Developers</h2>
-                        <h2 className="text-n-gray">Support</h2>
+                        <h2 className="text-n-gray hover:text-pr-cyan hover:cursor-pointer">Blog</h2>
+                        <h2 className="text-n-gray hover:text-pr-cyan hover:cursor-pointer">Developers</h2>
+                        <h2 className="text-n-gray hover:text-pr-cyan hover:cursor-pointer">Support</h2>
                       </div>
                     </div>
                     <div>
                       <h1 className="text-[20px]">Company</h1>
                       <div className="flex flex-col items-center jusify-center">
-                        <h2 className="text-n-gray">About</h2>
-                        <h2 className="text-n-gray">Our Team</h2>
-                        <h2 className="text-n-gray">Careers</h2>
-                        <h2 className="text-n-gray">Contact</h2>
+                        <h2 className="text-n-gray hover:text-pr-cyan hover:cursor-pointer">About</h2>
+                        <h2 className="text-n-gray hover:text-pr-cyan hover:cursor-pointer">Our Team</h2>
+                        <h2 className="text-n-gray hover:text-pr-cyan hover:cursor-pointer">Careers</h2>
+                        <h2 className="text-n-gray hover:text-pr-cyan hover:cursor-pointer">Contact</h2>
                       </div>
                     </div>
                     <div className="flex gap-4">
