@@ -70,7 +70,7 @@ export default function Home() {
               {/* Div for homepage image */}
               <div className="p-2 w-full p-2 lg:w-full lg:max-w-[40%]">
                 <img className={mobileNav ? "hidden" : ""} src="/images/illustration-working.svg" alt="Working svg"></img>
-                <div className={mobileNav ? "p-8 rounded-lg border-red-800 border-2 bg-pr-violet w-full flex flex-col gap-4" : "hidden"}>
+                <div className={mobileNav ? "p-8 rounded-lg bg-pr-violet w-full flex flex-col gap-4" : "hidden"}>
                   <div className="flex flex-col justify-center items-center gap-4 text-[15px] font-bold text-white">
                     <Link className="linkCustom" href="">Features</Link>
                     <Link className="linkCustom" href="">Pricing</Link>
