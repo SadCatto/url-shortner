@@ -68,7 +68,7 @@ export default function Home() {
             {/* Basically page 1 */}
             <div className="flex flex-col p-2 h-min items-center gap-2 bg-white lg:flex-row lg:flex-row-reverse lg:items-center lg:place-content-around lg:w-full lg:px-32 lg:py-8">
               {/* Div for homepage image */}
-              <div className="p-2 w-full p-2 lg:w-full lg:max-w-[40%]">
+              <div className="p-2 w-full p-2 lg:w-full lg:max-w-[60%]">
                 <img className={mobileNav ? "hidden" : ""} src="/images/illustration-working.svg" alt="Working svg"></img>
                 <div className={mobileNav ? "p-8 rounded-lg bg-pr-violet w-full flex flex-col gap-4" : "hidden"}>
                   <div className="flex flex-col justify-center items-center gap-4 text-[15px] font-bold text-white">
@@ -85,8 +85,8 @@ export default function Home() {
               </div>
               {/* Div for main text  */}
               <div className="flex flex-col gap-4 items-center p-2 leading-10 lg:w-full">
-                <h1 className="font-bold text-[40px] lg:text-[52px] text-center lg:text-left leading-none p-1">More than just shorter links</h1>
-                <h2 className="leading-8 text-center p-1 text-[18px] text-n-gray">Build your brands recognition and get detailed insights on how your links are performing</h2>
+                <h1 className="font-bold text-[40px] lg:text-[80px] text-center lg:text-left leading-none p-1">More than just shorter links</h1>
+                <h2 className="leading-8 text-center lg:text-left lg:pr-8 p-1 text-[16px] lg:text-[28px] text-n-gray">Build your brands recognition and get detailed insights on how your links are performing</h2>
                 {/* Div for get started button */}
                 <div className="flex justify-center text-[18px]">
                   <button className="rounded-[40px] bg-pr-cyan px-8 py-3 text-white font-[500] hover:bg-pr-cyan/[0.50]" onClick={handleClickScroll}>Get Started</button>
